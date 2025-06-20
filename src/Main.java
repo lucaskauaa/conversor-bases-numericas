@@ -4,28 +4,48 @@ public class Main {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		int numero = sc.nextInt();
+		int numeroDeEntrada = sc.nextInt();
 		
-		System.out.println(decimalParaBinario(numero));
+		System.out.println(decimalParaBinario(numeroDeEntrada));
 		
 		sc.close();
 
 	}
 	
-	public static int decimalParaBinario (int decimal) {
-		String binario = "";
-		int resultadoDivisão = decimal;
+	public static String decimalParaBinario (int numeroDecimalDeEntrada) {
 		
-		while (resultadoDivisão >= 1) {
-			binario += Integer.toString(resultadoDivisão % 2);
-			resultadoDivisão /= 2;
+		int numeroDecimal = numeroDecimalDeEntrada;
+		String numeroBinario = "";
+		
+		
+		while (numeroDecimal >= 1) {
+			numeroBinario += Integer.toString(numeroDecimal % 2);
+			numeroDecimal /= 2;
 		} 
 		
-		binario = new StringBuilder(binario).reverse().toString();
+		numeroBinario = new StringBuilder(numeroBinario).reverse().toString();
 		
-		int newBinario = Integer.parseInt(binario);
-		
-		return newBinario;
+		return numeroBinario;
 	}
 
+	public static String binarioParaDecimal (int numeroBinarioDeEntrada) {
+		
+		String numeroBinario = Integer.toString(numeroBinarioDeEntrada);
+		
+		numeroBinario = new StringBuilder(numeroBinario).reverse().toString();
+		
+		String[] listaDeBits = numeroBinario.split("");
+		
+		int bit;
+		
+		int numeroDecimal = 0;
+		
+		for (int i = 0; i < listaDeBits.length; i++) {
+			bit = Integer.parseInt(listaDeBits[i]);
+			
+			numeroDecimal += bit * Math.pow(2, i);
+		}
+		
+		return Integer.toString(numeroDecimal);
+	}
 }
