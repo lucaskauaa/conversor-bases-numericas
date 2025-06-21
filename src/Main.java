@@ -4,6 +4,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		System.out.print("Insira um número: ");
 		int numeroDeEntrada = sc.nextInt();
 		
 		System.out.println(decimalParaBinario(numeroDeEntrada));
@@ -19,20 +20,20 @@ public class Main {
 		
 		
 		while (numeroDecimal >= 1) {
-			numeroBinario += Integer.toString(numeroDecimal % 2);
+			numeroBinario += converterParaString(numeroDecimal % 2);
 			numeroDecimal /= 2;
 		} 
 		
-		numeroBinario = new StringBuilder(numeroBinario).reverse().toString();
+		numeroBinario = inverterString(numeroBinario);
 		
 		return numeroBinario;
 	}
 
 	public static String binarioParaDecimal (int numeroBinarioDeEntrada) {
 		
-		String numeroBinario = Integer.toString(numeroBinarioDeEntrada);
+		String numeroBinario = converterParaString(numeroBinarioDeEntrada);
 		
-		numeroBinario = new StringBuilder(numeroBinario).reverse().toString();
+		numeroBinario = inverterString(numeroBinario);
 		
 		String[] listaDeBits = numeroBinario.split("");
 		
@@ -41,11 +42,25 @@ public class Main {
 		int numeroDecimal = 0;
 		
 		for (int i = 0; i < listaDeBits.length; i++) {
-			bit = Integer.parseInt(listaDeBits[i]);
+			bit = converterParaInteiro(listaDeBits[i]);
 			
 			numeroDecimal += bit * Math.pow(2, i);
 		}
 		
-		return Integer.toString(numeroDecimal);
+		return converterParaString(numeroDecimal);
+	}
+	
+	public static String converterParaString (int numero) {
+		return Integer.toString(numero);
+	}
+	
+	public static int converterParaInteiro (String texto) {
+		return Integer.parseInt(texto);
+	}
+	
+	public static String inverterString (String texto) {
+		String textoInvertido = new StringBuilder(texto).reverse().toString();
+		
+		return textoInvertido;
 	}
 }
