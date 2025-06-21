@@ -4,11 +4,25 @@ public class Main {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Insira um número: ");
-		int numeroDeEntrada = sc.nextInt();
-		int baseNumerica = sc.nextInt();
 		
-		System.out.println(converterParaDecimal(numeroDeEntrada, baseNumerica));
+		System.out.println("CONVERSOR DE BASES NUMÉRICAS");
+		System.out.println("");
+		System.out.print("Insira o número que você quer converter: ");
+		int numeroDeEntrada = sc.nextInt();
+		System.out.println("[1] Decimal");
+		System.out.println("[2] Binário");
+		System.out.println("[3] Octal");
+		System.out.println("[4] Hexadecimal");
+		System.out.print("Selecione a base do número de entrada: ");
+		int baseNumericaDeEntrada = sc.nextInt();
+		System.out.print("Selecione a base do número de saída: ");
+		int baseNumericaDeRetorno = sc.nextInt();
+		
+		if (baseNumericaDeEntrada == 10) {
+			System.out.println(converterDecimalParaOutraBase(numeroDeEntrada, baseNumericaDeRetorno));
+		} else {
+			System.out.println(converterParaDecimal(numeroDeEntrada, baseNumericaDeRetorno));
+		}
 		
 		sc.close();
 
