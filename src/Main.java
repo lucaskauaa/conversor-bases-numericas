@@ -6,49 +6,51 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Insira um número: ");
 		int numeroDeEntrada = sc.nextInt();
+		int baseNumerica = sc.nextInt();
 		
-		System.out.println(decimalParaBinario(numeroDeEntrada));
+		System.out.println(converterParaDecimal(numeroDeEntrada, baseNumerica));
 		
 		sc.close();
 
 	}
 	
-	public static String decimalParaBinario (int numeroDecimalDeEntrada) {
+	public static String converterDecimalParaOutraBase (int numeroDeEntrada, int baseNumerica) {
 		
-		int numeroDecimal = numeroDecimalDeEntrada;
-		String numeroBinario = "";
+		int numero = numeroDeEntrada;
+		String numeroConvertido = "";
 		
 		
-		while (numeroDecimal >= 1) {
-			numeroBinario += converterParaString(numeroDecimal % 2);
-			numeroDecimal /= 2;
+		while (numero >= 1) {
+			numeroConvertido += converterParaString(numero % baseNumerica);
+			numero /= baseNumerica;
 		} 
 		
-		numeroBinario = inverterString(numeroBinario);
+		numeroConvertido = inverterString(numeroConvertido);
 		
-		return numeroBinario;
+		return numeroConvertido;
 	}
 
-	public static String binarioParaDecimal (int numeroBinarioDeEntrada) {
+	public static String converterParaDecimal (int numeroDeEntrada, int baseNumerica) {
 		
-		String numeroBinario = converterParaString(numeroBinarioDeEntrada);
+		String numero = converterParaString(numeroDeEntrada);
 		
-		numeroBinario = inverterString(numeroBinario);
+		numero = inverterString(numero);
 		
-		String[] listaDeBits = numeroBinario.split("");
+		String[] listaDeDigitos = numero.split("");
 		
-		int bit;
+		int digito;
 		
 		int numeroDecimal = 0;
 		
-		for (int i = 0; i < listaDeBits.length; i++) {
-			bit = converterParaInteiro(listaDeBits[i]);
+		for (int i = 0; i < listaDeDigitos.length; i++) {
+			digito = converterParaInteiro(listaDeDigitos[i]);
 			
-			numeroDecimal += bit * Math.pow(2, i);
+			numeroDecimal += digito * Math.pow(baseNumerica, i);
 		}
 		
 		return converterParaString(numeroDecimal);
 	}
+	
 	
 	public static String converterParaString (int numero) {
 		return Integer.toString(numero);
