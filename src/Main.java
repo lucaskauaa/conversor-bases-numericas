@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class Main {
@@ -5,39 +6,47 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("CONVERSOR DE BASES NUMÉRICAS");
-		System.out.println("");
-		System.out.print("Insira o número que você quer converter: ");
-		int numeroDeEntrada = sc.nextInt();
-		System.out.println("[1] Decimal");
-		System.out.println("[2] Binário");
-		System.out.println("[3] Octal");
-		System.out.println("[4] Hexadecimal");
-		System.out.print("Selecione a base do número de entrada: ");
-		int baseNumericaDeEntrada = sc.nextInt();
-		System.out.print("Selecione a base do número de saída: ");
-		int baseNumericaDeRetorno = sc.nextInt();
+		char repetir;
 		
-		if (baseNumericaDeEntrada == 1) {
-			System.out.println(converterDecimalParaOutraBase(numeroDeEntrada, baseNumericaDeRetorno));
+		do {
+			System.out.println("CONVERSOR DE BASES NUMÉRICAS:");
+			System.out.println("");
+			System.out.print("Insira o número que você quer converter: ");
+			String numeroDeEntrada = sc.nextLine();
+			System.out.println("Indique a base do número que você inseriu: ");
+			System.out.println("[1] Decimal");
+			System.out.println("[2] Binário");
+			System.out.println("[3] Octal");
+			System.out.println("[4] Hexadecimal");
+			System.out.print("=");
+			int baseNumericaDeEntrada = sc.nextInt();
+			System.out.print("Selecione a base numérica que você quer converter: ");
+			int baseNumericaDeSaida = sc.nextInt();
 			
-		} else if (baseNumericaDeEntrada != 1 && baseNumericaDeRetorno == 1) {
-			System.out.println(converterParaDecimal(numeroDeEntrada, baseNumericaDeEntrada));
+			if (baseNumericaDeEntrada == 1) {
+				System.out.println(converterDecimalParaOutraBase(numeroDeEntrada, baseNumericaDeSaida));
+				
+			} else if (baseNumericaDeEntrada != 1 && baseNumericaDeSaida == 1) {
+				System.out.println(converterParaDecimal(numeroDeEntrada, baseNumericaDeEntrada));
+				
+			} else {
+				String numeroDecimal = converterParaDecimal(numeroDeEntrada, baseNumericaDeEntrada);
+				System.out.println(converterDecimalParaOutraBase(numeroDecimal, baseNumericaDeSaida));
+			}
 			
-		} else {
-			String numeroDecimal = converterParaDecimal(numeroDeEntrada, baseNumericaDeEntrada);
-			System.out.println(converterDecimalParaOutraBase(converterParaInteiro(numeroDecimal), baseNumericaDeRetorno));
-		}
+			System.out.println("Converter novamente ? s/n");
+			repetir = sc.next().charAt(0); 
+			
+		} while (repetir == 's');
 		
 		sc.close();
-
 	}
 	
-	public static String converterDecimalParaOutraBase (int numeroDeEntrada, int baseNumericaDeSaida) {
+	public static String converterDecimalParaOutraBase (String numeroDeEntrada, int baseNumericaDeSaida) {
 		
 		int baseNumerica = verificarBaseNumerica(baseNumericaDeSaida);
 		
-		int numero = numeroDeEntrada;
+		int numero = converterParaInteiro(numeroDeEntrada);
 		String numeroConvertido = "";
 		
 		
@@ -51,26 +60,27 @@ public class Main {
 		return numeroConvertido;
 	}
 
-	public static String converterParaDecimal (int numeroDeEntrada, int baseNumericaDeEntrada) {
+	public static String converterParaDecimal (String numeroDeEntrada, int baseNumericaDeEntrada) {
 		
 		int baseNumerica = verificarBaseNumerica(baseNumericaDeEntrada);
 		
-		String numero = converterParaString(numeroDeEntrada);
+		String numero = numeroDeEntrada;
 		
-		numero = inverterString(numero);
-		
-		String[] listaDeDigitos = numero.split("");
-		
-		int digito;
+		int digito = 0;
 		
 		int numeroDecimal = 0;
-		
+			
+		numero = inverterString(numero);
+			
+		String[] listaDeDigitos = numero.split("");
+			
 		for (int i = 0; i < listaDeDigitos.length; i++) {
+						
 			digito = converterParaInteiro(listaDeDigitos[i]);
 			
 			numeroDecimal += digito * Math.pow(baseNumerica, i);
 		}
-		
+	
 		return converterParaString(numeroDecimal);
 	}
 	
@@ -89,9 +99,38 @@ public class Main {
 		}
 	}
 	
-	public static String formatarNumeroHexadecimal (int numeroDeEntrada) {
-		
-	}
+//	public static String formatarNumeroHexadecimalDeEntrada (String numeroDeEntrada) {
+//		String[] listaHexadecimal = numeroDeEntrada.split("");
+//		
+//		String digito = "";
+//		
+//		for (int i = 0; i < listaHexadecimal.length; i++) {
+//			switch (listaHexadecimal[i]) {
+//			case "A":
+//				digito += "10";
+//				break;
+//			case "B":
+//				digito += "11";
+//				break;
+//			case "C":
+//				digito += "12";
+//				break;
+//			case "D":
+//				digito += "13";
+//				break;
+//			case "E":
+//				digito += "14";
+//				break;
+//			case "F":
+//				digito += "15";
+//				break;
+//			default:
+//				digito += listaHexadecimal[i];
+//			}
+//		}
+//		
+//		return digito;
+//	}
 	
 	public static String converterParaString (int numero) {
 		return Integer.toString(numero);
@@ -106,4 +145,5 @@ public class Main {
 		
 		return textoInvertido;
 	}
+	
 }
