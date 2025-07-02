@@ -6,12 +6,12 @@ public class Converter {
 
 		int baseNumerica = verificarBaseNumerica(baseNumericaDeSaida);
 
-		int numero = converterParaInteiro(numeroDeEntrada);
+		int numeroDecimal = converterParaInteiro(numeroDeEntrada);
 		String numeroConvertido = "";
 
-		while (numero >= 1) {
-			numeroConvertido += converterParaString(numero % baseNumerica);
-			numero /= baseNumerica;
+		while (numeroDecimal >= 1) {
+			numeroConvertido += converterParaString(numeroDecimal % baseNumerica);
+			numeroDecimal /= baseNumerica;
 		}
 
 		numeroConvertido = inverterString(numeroConvertido);
@@ -21,23 +21,21 @@ public class Converter {
 
 	public static String converterParaDecimal(String numeroDeEntrada, int baseNumericaDeEntrada) {
 
-		int baseNumerica = verificarBaseNumerica(baseNumericaDeEntrada);
-
-		String numero = numeroDeEntrada;
+		baseNumericaDeEntrada =  verificarBaseNumerica(baseNumericaDeEntrada);
 
 		int numeroDecimal = 0;
 
 		if (baseNumericaDeEntrada != 16) {
 			
-			numero = inverterString(numero);
+			numeroDeEntrada = inverterString(numeroDeEntrada);
 
-			String[] listaDeDigitos = numero.split("");
+			String[] listaDeDigitos = numeroDeEntrada.split("");
 
 			for (int i = 0; i < listaDeDigitos.length; i++) {
 
 				int digito = converterParaInteiro(listaDeDigitos[i]);
 
-				numeroDecimal += digito * Math.pow(baseNumerica, i);
+				numeroDecimal += digito * Math.pow(baseNumericaDeEntrada, i);
 			}
 			
 			return converterParaString(numeroDecimal);
@@ -48,14 +46,14 @@ public class Converter {
 	}
 
 	public static String converterHexadecimalParaDecimal(String numeroDeEntrada) {
-		String[] teste = formatarNumeroHexadecimalDeEntrada(numeroDeEntrada);
+		int[] listaHexadecimal = formatarNumeroHexadecimalDeEntrada(numeroDeEntrada);
 		
 		int numeroDecimal = 0;
 		
 		int c = 0;
-		for (int i = teste.length - 1; i >= 0; i--) {
+		for (int i = listaHexadecimal.length - 1; i >= 0; i--) {
 
-			int digito = Integer.parseInt(teste[i]);
+			int digito = listaHexadecimal[i];
 
 			numeroDecimal += digito * Math.pow(16, c);
 			c++;
@@ -64,36 +62,36 @@ public class Converter {
 		return converterParaString(numeroDecimal);
 	}
 
-	public static String[] formatarNumeroHexadecimalDeEntrada(String numeroDeEntrada) {
-		String[] listaHexadecimal = numeroDeEntrada.toUpperCase().split("");
+	public static int[] formatarNumeroHexadecimalDeEntrada(String numeroDeEntrada) {
+		String[] digitosHexadecimais = numeroDeEntrada.toUpperCase().split("");
 
-		String[] teste = new String[listaHexadecimal.length];
+		int[] listaHexadecimal = new int[digitosHexadecimais.length];
 		for (int i = 0; i < listaHexadecimal.length; i++) {
-			switch (listaHexadecimal[i]) {
+			switch (digitosHexadecimais[i]) {
 			case "A":
-				teste[i] = "10";
+				listaHexadecimal[i] = 10;
 				break;
 			case "B":
-				teste[i] = "11";
+				listaHexadecimal[i] = 11;
 				break;
 			case "C":
-				teste[i] = "12";
+				listaHexadecimal[i] = 12;
 				break;
 			case "D":
-				teste[i] = "13";
+				listaHexadecimal[i] = 13;
 				break;
 			case "E":
-				teste[i] = "14";
+				listaHexadecimal[i] = 14;
 				break;
 			case "F":
-				teste[i] = "15";
+				listaHexadecimal[i] = 15;
 				break;
 			default:
-				teste[i] = listaHexadecimal[i];
+				listaHexadecimal[i] = converterParaInteiro(digitosHexadecimais[i]);
 			}
 		}
 
-		return teste;
+		return listaHexadecimal;
 	}
 
 	public static int verificarBaseNumerica(int baseNumericaDeEntrada) {
