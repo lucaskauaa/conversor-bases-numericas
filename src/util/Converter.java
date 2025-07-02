@@ -4,14 +4,12 @@ public class Converter {
 
 	public static String converterDecimalParaOutraBase(String numeroDeEntrada, int baseNumericaDeSaida) {
 
-		int baseNumerica = verificarBaseNumerica(baseNumericaDeSaida);
-
 		int numeroDecimal = converterParaInteiro(numeroDeEntrada);
 		String numeroConvertido = "";
 
 		while (numeroDecimal >= 1) {
-			numeroConvertido += converterParaString(numeroDecimal % baseNumerica);
-			numeroDecimal /= baseNumerica;
+			numeroConvertido += converterParaString(numeroDecimal % baseNumericaDeSaida);
+			numeroDecimal /= baseNumericaDeSaida;
 		}
 
 		numeroConvertido = inverterString(numeroConvertido);
@@ -20,8 +18,6 @@ public class Converter {
 	}
 
 	public static String converterParaDecimal(String numeroDeEntrada, int baseNumericaDeEntrada) {
-
-		baseNumericaDeEntrada =  verificarBaseNumerica(baseNumericaDeEntrada);
 
 		int numeroDecimal = 0;
 
@@ -93,21 +89,10 @@ public class Converter {
 
 		return listaHexadecimal;
 	}
-
-	public static int verificarBaseNumerica(int baseNumericaDeEntrada) {
-		switch (baseNumericaDeEntrada) {
-		case 1:
-			return 10;
-		case 2:
-			return 2;
-		case 3:
-			return 8;
-		case 4:
-			return 16;
-		default:
-			return 0;
-		}
-	}
+	
+//	public static String formatarNumeroHexadecimalDeSaida() {
+//		
+//	}
 
 	public static String converterParaString(int numero) {
 		return Integer.toString(numero);
