@@ -1,7 +1,6 @@
 package util;
 
 public class Converter {
-
 	private static final int DECIMAL_BASE = 10;
 	private static final int BINARY_BASE = 2;
 	private static final int OCTAL_BASE = 8;
@@ -10,33 +9,25 @@ public class Converter {
 	public static void convert(String inputNumber, int inputNumberBase) {
 
 		String decimal = "", binary = "", octal = "", hexadecimal = "";
-
+		
 		switch (inputNumberBase) {
 		case DECIMAL_BASE:
 			decimal = inputNumber;
-			binary = Converter.convertDecimalToAnotherBase(inputNumber, BINARY_BASE);
-			octal = Converter.convertDecimalToAnotherBase(inputNumber, OCTAL_BASE);
-			hexadecimal = Converter.convertDecimalToAnotherBase(inputNumber, HEXADECIMAL_BASE);
 			break;
 		case BINARY_BASE:
-			binary = inputNumber;
-			decimal = Converter.convertToDecimal(binary, BINARY_BASE);
-			octal = Converter.convertDecimalToAnotherBase(decimal, OCTAL_BASE);
-			hexadecimal = Converter.convertDecimalToAnotherBase(decimal, HEXADECIMAL_BASE);
+			decimal = convertToDecimal(inputNumber, BINARY_BASE);
 			break;
 		case OCTAL_BASE:
-			octal = inputNumber;
-			decimal = Converter.convertToDecimal(octal, OCTAL_BASE);
-			binary = Converter.convertDecimalToAnotherBase(decimal, BINARY_BASE);
-			hexadecimal = Converter.convertDecimalToAnotherBase(decimal, HEXADECIMAL_BASE);
+			decimal = convertToDecimal(inputNumber, OCTAL_BASE);
 			break;
 		case HEXADECIMAL_BASE:
-			hexadecimal = inputNumber;
-			decimal = Converter.convertToDecimal(hexadecimal, HEXADECIMAL_BASE);
-			binary = Converter.convertDecimalToAnotherBase(decimal, BINARY_BASE);
-			octal = Converter.convertDecimalToAnotherBase(decimal, OCTAL_BASE);
+			decimal = convertToDecimal(inputNumber, HEXADECIMAL_BASE);
 			break;
 		}
+		
+		binary = convertDecimalToAnotherBase(decimal, BINARY_BASE);
+		octal = convertDecimalToAnotherBase(decimal, OCTAL_BASE);
+		hexadecimal = convertDecimalToAnotherBase(decimal, HEXADECIMAL_BASE);
 
 		System.out.println("");
 		System.out.println("Número inserido: " + inputNumber + " base " + inputNumberBase);
@@ -62,9 +53,15 @@ public class Converter {
 			System.out.println("");
 			return true;
 			
+		} else if (inputNumberBase == DECIMAL_BASE && !inputNumber.matches("[0123456789]+")) {
+			System.out.println("Insira um número decimal válido!");
+			System.out.println("Números decimais só contém valores de 0 a 9.");
+			System.out.println("");
+			return true;
+			
 		} else if (inputNumberBase == HEXADECIMAL_BASE && !inputNumber.matches("[0123456789ABCDEF]+")) {
 			System.out.println("Insira um número hexadecimal válido!");
-			System.out.println("Números hexadecimais só contém valores de 0 a 9 e A - F");
+			System.out.println("Números hexadecimais só contém valores de 0 a 9 e A - F.");
 			System.out.println("");
 			return true;
 		}

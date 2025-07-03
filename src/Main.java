@@ -36,7 +36,7 @@ public class Main {
 			Converter.convert(inputNumber, inputNumberBase);
 
 			System.out.println("");
-			System.out.println("Converter novamente ? s/n");
+			System.out.print("Converter novamente ? s/n ");
 			repeat = sc.next().charAt(0);
 			sc.nextLine();
 		}
