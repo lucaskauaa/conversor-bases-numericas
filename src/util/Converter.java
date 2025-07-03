@@ -2,110 +2,145 @@ package util;
 
 public class Converter {
 
-	public static String converterDecimalParaOutraBase(String numeroDeEntrada, int baseNumericaDeSaida) {
+	public static String convertDecimalToAnotherBase(String inputNumber, int outputNumberBase) {
 
-		int numeroDecimal = converterParaInteiro(numeroDeEntrada);
-		String numeroConvertido = "";
+		int decimalNumber = convertToInteger(inputNumber);
+		String convertedNumber = "";
+		String hexadecimalNumber = "";
 
-		while (numeroDecimal >= 1) {
-			numeroConvertido += converterParaString(numeroDecimal % baseNumericaDeSaida);
-			numeroDecimal /= baseNumericaDeSaida;
-		}
+		int hexadecimalBase = 16;
 
-		numeroConvertido = inverterString(numeroConvertido);
-
-		return numeroConvertido;
-	}
-
-	public static String converterParaDecimal(String numeroDeEntrada, int baseNumericaDeEntrada) {
-
-		int numeroDecimal = 0;
-
-		if (baseNumericaDeEntrada != 16) {
-			
-			numeroDeEntrada = inverterString(numeroDeEntrada);
-
-			String[] listaDeDigitos = numeroDeEntrada.split("");
-
-			for (int i = 0; i < listaDeDigitos.length; i++) {
-
-				int digito = converterParaInteiro(listaDeDigitos[i]);
-
-				numeroDecimal += digito * Math.pow(baseNumericaDeEntrada, i);
+		if (outputNumberBase != hexadecimalBase) {
+			while (decimalNumber >= 1) {
+				convertedNumber += convertToString(decimalNumber % outputNumberBase);
+				decimalNumber /= outputNumberBase;
 			}
-			
-			return converterParaString(numeroDecimal);
-			
+
 		} else {
-			return converterHexadecimalParaDecimal(numeroDeEntrada);
+			while (decimalNumber >= 1) {
+				convertedNumber = convertToString(decimalNumber % outputNumberBase);
+				hexadecimalNumber += formatOutputHexadecimalNumber(convertedNumber);
+				decimalNumber /= outputNumberBase;
+			}
+
+			convertedNumber = hexadecimalNumber;
+		}
+
+		convertedNumber = reverseString(convertedNumber);
+
+		return convertedNumber;
+	}
+
+	public static String convertToDecimal(String inputNumber, int inputNumberBase) {
+
+		int decimalNumber = 0;
+
+		int hexadecimalBase = 16;
+
+		if (inputNumberBase != hexadecimalBase) {
+
+			inputNumber = reverseString(inputNumber);
+
+			String[] listOfDigits = inputNumber.split("");
+
+			for (int i = 0; i < listOfDigits.length; i++) {
+
+				int digit = convertToInteger(listOfDigits[i]);
+
+				decimalNumber += digit * Math.pow(inputNumberBase, i);
+			}
+
+			return convertToString(decimalNumber);
+
+		} else {
+			return convertHexadecimalToDecimal(inputNumber);
 		}
 	}
 
-	public static String converterHexadecimalParaDecimal(String numeroDeEntrada) {
-		int[] listaHexadecimal = formatarNumeroHexadecimalDeEntrada(numeroDeEntrada);
-		
-		int numeroDecimal = 0;
-		
-		int c = 0;
-		for (int i = listaHexadecimal.length - 1; i >= 0; i--) {
+	public static String convertHexadecimalToDecimal(String inputNumber) {
+		int[] hexadecimalList = formatInputHexadecimalNumber(inputNumber);
 
-			int digito = listaHexadecimal[i];
+		int decimalNumber = 0;
 
-			numeroDecimal += digito * Math.pow(16, c);
-			c++;
+		int hexadecimalBase = 16;
+
+		int power = 0;
+		for (int i = hexadecimalList.length - 1; i >= 0; i--) {
+
+			int digit = hexadecimalList[i];
+
+			decimalNumber += digit * Math.pow(hexadecimalBase, power);
+			power++;
 		}
-		
-		return converterParaString(numeroDecimal);
+
+		return convertToString(decimalNumber);
 	}
 
-	public static int[] formatarNumeroHexadecimalDeEntrada(String numeroDeEntrada) {
-		String[] digitosHexadecimais = numeroDeEntrada.toUpperCase().split("");
+	public static int[] formatInputHexadecimalNumber(String inputNumber) {
+		String[] hexadecimalDigits = inputNumber.toUpperCase().split("");
 
-		int[] listaHexadecimal = new int[digitosHexadecimais.length];
-		for (int i = 0; i < listaHexadecimal.length; i++) {
-			switch (digitosHexadecimais[i]) {
+		int[] hexadecimalList = new int[hexadecimalDigits.length];
+		for (int i = 0; i < hexadecimalList.length; i++) {
+			switch (hexadecimalDigits[i]) {
 			case "A":
-				listaHexadecimal[i] = 10;
+				hexadecimalList[i] = 10;
 				break;
 			case "B":
-				listaHexadecimal[i] = 11;
+				hexadecimalList[i] = 11;
 				break;
 			case "C":
-				listaHexadecimal[i] = 12;
+				hexadecimalList[i] = 12;
 				break;
 			case "D":
-				listaHexadecimal[i] = 13;
+				hexadecimalList[i] = 13;
 				break;
 			case "E":
-				listaHexadecimal[i] = 14;
+				hexadecimalList[i] = 14;
 				break;
 			case "F":
-				listaHexadecimal[i] = 15;
+				hexadecimalList[i] = 15;
 				break;
 			default:
-				listaHexadecimal[i] = converterParaInteiro(digitosHexadecimais[i]);
+				hexadecimalList[i] = convertToInteger(hexadecimalDigits[i]);
 			}
 		}
 
-		return listaHexadecimal;
-	}
-	
-//	public static String formatarNumeroHexadecimalDeSaida() {
-//		
-//	}
-
-	public static String converterParaString(int numero) {
-		return Integer.toString(numero);
+		return hexadecimalList;
 	}
 
-	public static int converterParaInteiro(String texto) {
-		return Integer.parseInt(texto);
+	public static String formatOutputHexadecimalNumber(String inputNumber) {
+		switch (inputNumber) {
+		case "10":
+			return "A";
+		case "11":
+			return "B";
+		case "12":
+			return "C";
+		case "13":
+			return "D";
+		case "14":
+			return "E";
+		case "15":
+			return "F";
+		case "16":
+			return "G";
+		default:
+			return inputNumber;
+		}
 	}
 
-	public static String inverterString(String texto) {
-		String textoInvertido = new StringBuilder(texto).reverse().toString();
+	public static int convertToInteger(String text) {
+		return Integer.parseInt(text);
+	}
 
-		return textoInvertido;
+	public static String convertToString(int number) {
+		return Integer.toString(number);
+	}
+
+	public static String reverseString(String text) {
+		String invertedText = new StringBuilder(text).reverse().toString();
+
+		return invertedText;
 	}
 
 }
