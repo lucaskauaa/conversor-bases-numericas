@@ -2,15 +2,95 @@ package util;
 
 public class Converter {
 
+	private static final int DECIMAL_BASE = 10;
+	private static final int BINARY_BASE = 2;
+	private static final int OCTAL_BASE = 8;
+	private static final int HEXADECIMAL_BASE = 16;
+
+	public static void convert(String inputNumber, int inputNumberBase) {
+
+		String decimal = "", binary = "", octal = "", hexadecimal = "";
+
+		switch (inputNumberBase) {
+		case DECIMAL_BASE:
+			decimal = inputNumber;
+			binary = Converter.convertDecimalToAnotherBase(inputNumber, BINARY_BASE);
+			octal = Converter.convertDecimalToAnotherBase(inputNumber, OCTAL_BASE);
+			hexadecimal = Converter.convertDecimalToAnotherBase(inputNumber, HEXADECIMAL_BASE);
+			break;
+		case BINARY_BASE:
+			binary = inputNumber;
+			decimal = Converter.convertToDecimal(binary, BINARY_BASE);
+			octal = Converter.convertDecimalToAnotherBase(decimal, OCTAL_BASE);
+			hexadecimal = Converter.convertDecimalToAnotherBase(decimal, HEXADECIMAL_BASE);
+			break;
+		case OCTAL_BASE:
+			octal = inputNumber;
+			decimal = Converter.convertToDecimal(octal, OCTAL_BASE);
+			binary = Converter.convertDecimalToAnotherBase(decimal, BINARY_BASE);
+			hexadecimal = Converter.convertDecimalToAnotherBase(decimal, HEXADECIMAL_BASE);
+			break;
+		case HEXADECIMAL_BASE:
+			hexadecimal = inputNumber;
+			decimal = Converter.convertToDecimal(hexadecimal, HEXADECIMAL_BASE);
+			binary = Converter.convertDecimalToAnotherBase(decimal, BINARY_BASE);
+			octal = Converter.convertDecimalToAnotherBase(decimal, OCTAL_BASE);
+			break;
+		}
+
+		System.out.println("");
+		System.out.println("Número inserido: " + inputNumber + " base " + inputNumberBase);
+		System.out.println("");
+		System.out.println("Resultado da conversão:");
+		System.out.println("Decimal: " + decimal);
+		System.out.println("Binário: " + binary);
+		System.out.println("Octal: " + octal);
+		System.out.println("Hexadecimal: " + hexadecimal);
+	}
+
+	public static boolean validateInputNumber(String inputNumber, int inputNumberBase) {
+
+		if (inputNumberBase == BINARY_BASE && !inputNumber.matches("[01]+")) {
+			System.out.println("Insira um número binário válido!");
+			System.out.println("Números binários só contém valores 0s e 1s.");
+			System.out.println("");
+			return true;
+			
+		} else if (inputNumberBase == OCTAL_BASE && !inputNumber.matches("[01234567]+")) {
+			System.out.println("Insira um número octal válido!");
+			System.out.println("Números octais só contém valores de 0 a 7.");
+			System.out.println("");
+			return true;
+			
+		} else if (inputNumberBase == HEXADECIMAL_BASE && !inputNumber.matches("[0123456789ABCDEF]+")) {
+			System.out.println("Insira um número hexadecimal válido!");
+			System.out.println("Números hexadecimais só contém valores de 0 a 9 e A - F");
+			System.out.println("");
+			return true;
+		}
+			
+		return false;
+	}
+
+	public static boolean validateInputNumberBase(int inputNumberBase) {
+
+		if (inputNumberBase != BINARY_BASE && inputNumberBase != OCTAL_BASE && inputNumberBase != DECIMAL_BASE & inputNumberBase != HEXADECIMAL_BASE) {
+			System.out.println("Base numérica inválida!");
+			System.out.println("Selecione uma das opções acima.");
+			System.out.println("");
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public static String convertDecimalToAnotherBase(String inputNumber, int outputNumberBase) {
 
 		int decimalNumber = convertToInteger(inputNumber);
 		String convertedNumber = "";
 		String hexadecimalNumber = "";
 
-		int hexadecimalBase = 16;
-
-		if (outputNumberBase != hexadecimalBase) {
+		if (outputNumberBase != HEXADECIMAL_BASE) {
 			while (decimalNumber >= 1) {
 				convertedNumber += convertToString(decimalNumber % outputNumberBase);
 				decimalNumber /= outputNumberBase;
@@ -35,9 +115,7 @@ public class Converter {
 
 		int decimalNumber = 0;
 
-		int hexadecimalBase = 16;
-
-		if (inputNumberBase != hexadecimalBase) {
+		if (inputNumberBase != HEXADECIMAL_BASE) {
 
 			inputNumber = reverseString(inputNumber);
 
@@ -62,14 +140,12 @@ public class Converter {
 
 		int decimalNumber = 0;
 
-		int hexadecimalBase = 16;
-
 		int power = 0;
 		for (int i = hexadecimalList.length - 1; i >= 0; i--) {
 
 			int digit = hexadecimalList[i];
 
-			decimalNumber += digit * Math.pow(hexadecimalBase, power);
+			decimalNumber += digit * Math.pow(HEXADECIMAL_BASE, power);
 			power++;
 		}
 
