@@ -13,6 +13,7 @@ public class Main {
 		while (Character.toLowerCase(repeat) == 's') {
 			System.out.print("Insira o número que você quer converter: ");
 			String inputNumber = sc.nextLine();
+			inputNumber = inputNumber.toUpperCase();
 			System.out.println("Indique a base do número que você inseriu: ");
 			System.out.println("[10] Decimal");
 			System.out.println("[2] Binário");

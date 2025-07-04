@@ -150,7 +150,7 @@ public class Converter {
 	}
 
 	public static int[] formatInputHexadecimalNumber(String inputNumber) {
-		String[] hexadecimalDigits = inputNumber.toUpperCase().split("");
+		String[] hexadecimalDigits = inputNumber.split("");
 
 		int[] hexadecimalList = new int[hexadecimalDigits.length];
 		for (int i = 0; i < hexadecimalList.length; i++) {
