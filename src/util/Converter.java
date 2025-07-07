@@ -1,10 +1,7 @@
 package util;
 
 public class Converter {
-	private static final int DECIMAL_BASE = 10;
-	private static final int BINARY_BASE = 2;
-	private static final int OCTAL_BASE = 8;
-	private static final int HEXADECIMAL_BASE = 16;
+	private static final int DECIMAL_BASE = 10, BINARY_BASE = 2, OCTAL_BASE = 8, HEXADECIMAL_BASE = 16;
 
 	public static void convert(String inputNumber, int inputNumberBase) {
 
@@ -152,33 +149,34 @@ public class Converter {
 	public static int[] formatInputHexadecimalNumber(String inputNumber) {
 		String[] hexadecimalDigits = inputNumber.split("");
 
-		int[] hexadecimalList = new int[hexadecimalDigits.length];
-		for (int i = 0; i < hexadecimalList.length; i++) {
+		int[] outputHexadecimalList = new int[hexadecimalDigits.length];
+		
+		for (int i = 0; i < outputHexadecimalList.length; i++) {
 			switch (hexadecimalDigits[i]) {
 			case "A":
-				hexadecimalList[i] = 10;
+				outputHexadecimalList[i] = 10;
 				break;
 			case "B":
-				hexadecimalList[i] = 11;
+				outputHexadecimalList[i] = 11;
 				break;
 			case "C":
-				hexadecimalList[i] = 12;
+				outputHexadecimalList[i] = 12;
 				break;
 			case "D":
-				hexadecimalList[i] = 13;
+				outputHexadecimalList[i] = 13;
 				break;
 			case "E":
-				hexadecimalList[i] = 14;
+				outputHexadecimalList[i] = 14;
 				break;
 			case "F":
-				hexadecimalList[i] = 15;
+				outputHexadecimalList[i] = 15;
 				break;
 			default:
-				hexadecimalList[i] = convertToInteger(hexadecimalDigits[i]);
+				outputHexadecimalList[i] = convertToInteger(hexadecimalDigits[i]);
 			}
 		}
 
-		return hexadecimalList;
+		return outputHexadecimalList;
 	}
 
 	public static String formatOutputHexadecimalNumber(String inputNumber) {
