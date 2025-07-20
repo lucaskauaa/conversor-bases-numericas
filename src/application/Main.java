@@ -15,6 +15,7 @@ public class Main {
 			System.out.print("Insira o número que você quer converter: ");
 			String inputNumber = sc.nextLine();
 			inputNumber = inputNumber.toUpperCase();
+			System.out.println();
 			System.out.println("Indique a base do número que você inseriu: ");
 			System.out.println("[10] Decimal");
 			System.out.println("[2] Binário");
@@ -37,7 +38,7 @@ public class Main {
 
 			Converter.convert(inputNumber, inputNumberBase);
 
-			System.out.println("");
+			System.out.println();
 			System.out.print("Converter novamente ? s/n ");
 			repeat = sc.next().charAt(0);
 			sc.nextLine();

@@ -26,10 +26,11 @@ public class Converter {
 		octal = convertDecimalToAnotherBase(decimal, OCTAL_BASE);
 		hexadecimal = convertDecimalToAnotherBase(decimal, HEXADECIMAL_BASE);
 
-		System.out.println("");
+		System.out.println();
 		System.out.println("Número inserido: " + inputNumber + " base " + inputNumberBase);
-		System.out.println("");
+		System.out.println();
 		System.out.println("Resultado da conversão:");
+		System.out.println();
 		System.out.println("Decimal: " + decimal);
 		System.out.println("Binário: " + binary);
 		System.out.println("Octal: " + octal);
@@ -78,7 +79,7 @@ public class Converter {
 		}
 	}
 
-	public static String convertDecimalToAnotherBase(String inputNumber, int outputNumberBase) {
+	private static String convertDecimalToAnotherBase(String inputNumber, int outputNumberBase) {
 
 		int decimalNumber = convertToInteger(inputNumber);
 		String convertedNumber = "";
@@ -105,7 +106,7 @@ public class Converter {
 		return convertedNumber;
 	}
 
-	public static String convertToDecimal(String inputNumber, int inputNumberBase) {
+	private static String convertToDecimal(String inputNumber, int inputNumberBase) {
 
 		int decimalNumber = 0;
 
@@ -129,7 +130,7 @@ public class Converter {
 		}
 	}
 
-	public static String convertHexadecimalToDecimal(String inputNumber) {
+	private static String convertHexadecimalToDecimal(String inputNumber) {
 		int[] hexadecimalList = formatInputHexadecimalNumber(inputNumber);
 
 		int decimalNumber = 0;
@@ -146,7 +147,7 @@ public class Converter {
 		return convertToString(decimalNumber);
 	}
 
-	public static int[] formatInputHexadecimalNumber(String inputNumber) {
+	private static int[] formatInputHexadecimalNumber(String inputNumber) {
 		String[] hexadecimalDigits = inputNumber.split("");
 
 		int[] outputHexadecimalList = new int[hexadecimalDigits.length];
@@ -179,7 +180,7 @@ public class Converter {
 		return outputHexadecimalList;
 	}
 
-	public static String formatOutputHexadecimalNumber(String inputNumber) {
+	private static String formatOutputHexadecimalNumber(String inputNumber) {
 		switch (inputNumber) {
 		case "10":
 			return "A";
@@ -200,15 +201,15 @@ public class Converter {
 		}
 	}
 
-	public static int convertToInteger(String text) {
+	private static int convertToInteger(String text) {
 		return Integer.parseInt(text);
 	}
 
-	public static String convertToString(int number) {
+	private static String convertToString(int number) {
 		return Integer.toString(number);
 	}
 
-	public static String reverseString(String text) {
+	private static String reverseString(String text) {
 		String invertedText = new StringBuilder(text).reverse().toString();
 
 		return invertedText;
