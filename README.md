@@ -55,11 +55,6 @@ src/
 - `Main.java`: Responsável pela interação com o usuário.
 - `Converter.java`: Contém a lógica de conversão utilizando métodos estáticos como `convertToDecimal()` e `convertDecimalToAnotherBase()`.
 
-
-### 📋 Diagrama UML
-
-![Diagrama UML da classe Converter](https://github.com/lucaskauaa/conversor-bases-numericas/blob/main/img/conversor-bases-numericas-uml.png)
-
 ## 🧑‍💻 Autor
 
 Desenvolvido por **Lucas Kauã**.
