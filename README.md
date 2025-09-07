@@ -9,9 +9,21 @@ Projeto feito em **Java**, no qual o usuário pode inserir um número inteiro e 
 
 ## ▶️ Como Executar
 
-1. Ter o **Java** (*versão 21*) e o editor de código **Eclipse** instalados no computador.  
-2. Baixar o arquivo `.zip` ou clonar o repositório: https://github.com/lucaskauaa/conversor-bases-numericas.git (é necessário ter o Git instalado).  
-3. Abrir a pasta do projeto no Eclipse → acessar o arquivo `src/application/Main.java` → clicar com o botão direito → **Run As** → **Java Application**.
+1. Certifique-se de ter o **JDK (Java Development Kit)** (*versão 21*) e o editor de código **Eclipse** instalados no computador.  
+
+2. Baixe o arquivo `.zip` do repositório ou faça o clone utilizando o Git Bash através do link: https://github.com/lucaskauaa/conversor-bases-numericas.git
+
+3. Após extrair o arquivo `.zip` ou clonar o repositório, abra o Eclipse e siga o caminho:  
+   ```
+   File → Switch Workspace → Other... → Browse → selecionar a pasta `conversor-bases-numericas` → Launch
+   ```
+
+4. Importe o projeto no Eclipse:  
+   ```
+   File → Import → General → Existing Projects into Workspace → Next → Browse → selecionar a pasta `conversor-bases-numericas` → Finish
+   ```
+
+5. Acesse o arquivo `src/application/Main.java` e pressione **F11** para executar.  
 
 ## 🧪 Exemplo de Uso
 
